@@ -263,6 +263,8 @@ extern crate packed_simd;
 
 extern crate byteorder;
 pub extern crate digest;
+
+#[cfg(not(target_arch = "bpf"))]
 extern crate rand_core;
 extern crate zeroize;
 

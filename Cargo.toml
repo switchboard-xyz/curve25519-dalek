@@ -42,7 +42,6 @@ name = "dalek_benchmarks"
 harness = false
 
 [dependencies]
-rand_core = { version = "0.5", default-features = false }
 byteorder = { version = "^1.2.3", default-features = false, features = ["i128"] }
 digest = { version = "0.9", default-features = false }
 subtle = { version = "^2.2.1", default-features = false }
@@ -52,6 +51,9 @@ serde = { version = "1.0", default-features = false, optional = true, features =
 packed_simd = { version = "0.3.4", package = "packed_simd_2", features = ["into_bits"], optional = true }
 zeroize = { version = "1", default-features = false }
 fiat-crypto = { version = "0.1.6", optional = true}
+
+[target.'cfg(not(target_arch = "bpf"))'.dependencies]
+rand_core = { version = "0.5", default-features = false }
 
 [features]
 nightly = ["subtle/nightly"]
