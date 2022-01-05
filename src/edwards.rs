@@ -320,10 +320,10 @@ impl<'de> Deserialize<'de> for CompressedEdwardsY {
 #[derive(Copy, Clone)]
 #[allow(missing_docs)]
 pub struct EdwardsPoint {
-    pub(crate) X: FieldElement,
-    pub(crate) Y: FieldElement,
-    pub(crate) Z: FieldElement,
-    pub(crate) T: FieldElement,
+    pub X: FieldElement,
+    pub Y: FieldElement,
+    pub Z: FieldElement,
+    pub T: FieldElement,
 }
 
 // ------------------------------------------------------------------------
@@ -798,6 +798,26 @@ impl EdwardsPoint {
     ) -> EdwardsPoint {
         scalar_mul::vartime_double_base::mul(a, A, b)
     }
+
+    /// F
+    pub fn from_bytes(bytes: &[u8]) -> EdwardsPoint {
+        let mut buffer: [u8; 32] = [0; 32];
+
+        buffer.copy_from_slice(&bytes[..32]);
+        let X = FieldElement::from_bytes(&buffer);
+
+        buffer.copy_from_slice(&bytes[32..64]);
+        let Y = FieldElement::from_bytes(&buffer);
+
+        buffer.copy_from_slice(&bytes[64..96]);
+        let Z = FieldElement::from_bytes(&buffer);
+
+        buffer.copy_from_slice(&bytes[96..]);
+        let T = FieldElement::from_bytes(&buffer);
+
+        EdwardsPoint{ X, Y, Z, T }
+    }
+
 }
 
 macro_rules! impl_basepoint_table {

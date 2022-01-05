@@ -207,7 +207,7 @@ pub struct Scalar {
     //
     // XXX This is pub(crate) so we can write literal constants.  If const fns were stable, we could
     //     make the Scalar constructors const fns and use those instead.
-    pub(crate) bytes: [u8; 32],
+    pub bytes: [u8; 32],
 }
 
 impl Scalar {
@@ -824,7 +824,7 @@ impl Scalar {
     }
 
     /// Get the bits of the scalar.
-    pub(crate) fn bits(&self) -> [i8; 256] {
+    pub fn bits(&self) -> [i8; 256] {
         let mut bits = [0i8; 256];
         for i in 0..256 {
             // As i runs from 0..256, the bottom 3 bits index the bit,

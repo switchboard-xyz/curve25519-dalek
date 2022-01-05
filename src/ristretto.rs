@@ -439,7 +439,7 @@ impl<'de> Deserialize<'de> for CompressedRistretto {
 /// `EdwardsPoint`s.
 ///
 #[derive(Copy, Clone)]
-pub struct RistrettoPoint(pub(crate) EdwardsPoint);
+pub struct RistrettoPoint(pub EdwardsPoint);
 
 impl RistrettoPoint {
     /// Compress this point using the Ristretto encoding.
@@ -587,7 +587,7 @@ impl RistrettoPoint {
 
 
     /// Return the coset self + E[4], for debugging.
-    fn coset4(&self) -> [EdwardsPoint; 4] {
+    pub fn coset4(&self) -> [EdwardsPoint; 4] {
         [  self.0
         , &self.0 + &constants::EIGHT_TORSION[2]
         , &self.0 + &constants::EIGHT_TORSION[4]
@@ -601,7 +601,7 @@ impl RistrettoPoint {
     ///
     /// This method is not public because it's just used for hashing
     /// to a point -- proper elligator support is deferred for now.
-    pub(crate) fn elligator_ristretto_flavor(r_0: &FieldElement) -> RistrettoPoint {
+    pub fn elligator_ristretto_flavor(r_0: &FieldElement) -> RistrettoPoint {
         let i = &constants::SQRT_M1;
         let d = &constants::EDWARDS_D;
         let one_minus_d_sq = &constants::ONE_MINUS_EDWARDS_D_SQUARED;
