@@ -135,6 +135,7 @@ impl FieldElement {
 
     /// Compute (self^(2^250-1), self^11), used as a helper function
     /// within invert() and pow22523().
+    #[inline(never)]
     fn pow22501(&self) -> (FieldElement, FieldElement) {
         // Instead of managing which temporary variables are used
         // for what, we define as many as we need and leave stack
@@ -200,6 +201,7 @@ impl FieldElement {
     /// x^(p-2)x = x^(p-1) = 1 (mod p).
     ///
     /// This function returns zero on input zero.
+    #[inline(never)]
     pub fn invert(&self) -> FieldElement {
         // The bits of p-2 = 2^255 -19 -2 are 11010111111...11.
         //
@@ -212,6 +214,7 @@ impl FieldElement {
     }
 
     /// Raise this field element to the power (p-5)/8 = 2^252 -3.
+    #[inline(never)]
     fn pow_p58(&self) -> FieldElement {
         // The bits of (p-5)/8 are 101111.....11.
         //
@@ -235,6 +238,7 @@ impl FieldElement {
     /// - `(Choice(0), zero)        ` if `v` is zero and `u` is nonzero;
     /// - `(Choice(0), +sqrt(i*u/v))` if `u/v` is nonsquare (so `i*u/v` is square).
     ///
+    #[inline(never)]
     pub fn sqrt_ratio_i(u: &FieldElement, v: &FieldElement) -> (Choice, FieldElement) {
         // Using the same trick as in ed25519 decoding, we merge the
         // inversion, the square root, and the square test as follows.
