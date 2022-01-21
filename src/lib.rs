@@ -273,7 +273,6 @@ extern crate fiat_crypto;
 
 // Used for traits related to constant-time code.
 extern crate subtle;
-pub use subtle;
 
 #[cfg(all(test, feature = "serde"))]
 extern crate bincode;
@@ -306,7 +305,7 @@ pub mod constants;
 // External (and internal) traits.
 pub mod traits;
 
-pub mod choice;
+extern crate choice;
 
 //------------------------------------------------------------------------
 // curve25519-dalek internal modules
