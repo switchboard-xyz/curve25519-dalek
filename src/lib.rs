@@ -307,8 +307,6 @@ pub mod constants;
 // External (and internal) traits.
 pub mod traits;
 
-pub mod field;
-
 pub mod choice;
 
 //------------------------------------------------------------------------
