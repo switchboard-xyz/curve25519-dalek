@@ -305,7 +305,6 @@ pub mod constants;
 // External (and internal) traits.
 pub mod traits;
 
-extern crate choice;
 
 //------------------------------------------------------------------------
 // curve25519-dalek internal modules
